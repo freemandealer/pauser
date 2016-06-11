@@ -83,8 +83,11 @@ def main(argv):
     silence = AudioSegment.silent(duration=blank*(len(chunks[i]) + extra_blank))
     new += silence
 
-  save_name = "paused-"+file_name
-  new.export(save_name, format="mp3")
+  origin_filename=os.path.basename(file_name)
+  origin_format=os.path.splitext(file_name)[1].strip('.')
+  save_file=os.path.dirname(file_name) + '/paused-' + origin_filename
+  new.export(save_file, format=origin_format)
+  print '\nFile is saved as ' + save_file + '\n'
 
 if __name__ == '__main__':
     main(sys.argv)
